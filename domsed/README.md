@@ -20,7 +20,7 @@ The domsed repo can be accessed at https://github.com/cerebrotech/domsed/
 
 ### Step 3 - Install Domsed in your Domino installation
 
-Follow the steps outlined in the following installation [README](https://github.com/cerebrotech/domsed/install/README_INSTALL.md)
+Follow the steps outlined in the following installation [README](https://github.com/cerebrotech/field-engineered-projects-enablement/tree/main/domsed#readme)
 
 ## Debugging Domsed - Common problems
 
