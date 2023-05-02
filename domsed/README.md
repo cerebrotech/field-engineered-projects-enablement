@@ -1,6 +1,14 @@
-## Self Paced Enablement for Domsed
+# Self Paced Enablement for Domsed
 
-Follow this page for performing a self paced enablement on Domsed
+Follow this page for performing a self paced enablement on Domsed. 
+
+## Expected Outcomes
+
+By the end of this tutorial you will be able to -
+
+1. Install Domsed
+2. Debug Domsed 
+3. Create a brand new mutation of Domsed
 
 ### Step 1 - Start a Domino Cluster (Or reuse an existing one)
 
@@ -85,7 +93,7 @@ Some of the files that may need to be changed -
 
 ## ADD YOUR OWN FINDINGS AND EXTEND THIS PAGE
 
-Please feel free to contribute
+Please feel free to contribute with your own findings. 
 
 
 
