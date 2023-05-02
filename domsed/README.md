@@ -8,7 +8,7 @@ By the end of this tutorial you will be able to -
 
 1. Install Domsed
 2. Debug Domsed 
-3. Create a brand new mutation of Domsed
+3. Create a brand new mutation in Domsed
 
 ### Step 1 - Start a Domino Cluster (Or reuse an existing one)
 
