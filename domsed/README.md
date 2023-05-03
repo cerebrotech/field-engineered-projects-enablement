@@ -95,7 +95,7 @@ Some of the files that may need to be changed -
 
 #### How does a mutating webhook work?
 
-Review file `./helm/domsed/mutation.yaml` and understand what a `MutatingWebhookConfiguration` is configured
+Review file `./helm/domsed/mutation.yaml` and understand how a `MutatingWebhookConfiguration` is configured
 
 How does the configuration mark the type of resources being watched and how do you add to those types?
 
