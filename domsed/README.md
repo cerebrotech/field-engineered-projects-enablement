@@ -109,7 +109,7 @@ and correlate that to the operator-webhook deployment code `./domsed/webhook.py`
 [Alphabetical](https://www.reddit.com/r/kubernetes/comments/g864zf/is_there_a_way_to_change_the_triggering_order_of/) order of their names. You can control the order by changing their names. But it is not the 
 best idea. Instead use the `Reinvocation Policy` [capability](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#reinvocation-policy)
 
-#### If the mutation throws and error will my workspace fail?
+#### If the mutation throws and error will my workspace/workload fail?
 
 No. The mutation will not be applied. The [Failure Policy](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#reinvocation-policy) is set to `Ignore` 
 
