@@ -91,6 +91,27 @@ Some of the files that may need to be changed -
 4. Possibly `helm\domsed\values.yaml`
 
 
+### More Advanced Stuff
+
+#### How does a mutating webhook work?
+
+Review file `./helm/domsed/mutation.yaml` and understand what a `MutatingWebhookConfiguration` is configured
+
+How does the configuration mark the type of resources being watched and how do you add to those types?
+
+#### What is the role of the ServiceAccount for the Webhook?
+
+Review the file `./helm/domsed/serviceaccount.yaml`, `./helm/domsed/role.yaml` and `helm/domsed/rolebinding.yaml` 
+and correlate that to the operator-webhook deployment code `./domsed/webhook.py`
+
+#### If there are multiple mutating webhooks what is the order in which they apply?
+
+[Alphabetical](https://www.reddit.com/r/kubernetes/comments/g864zf/is_there_a_way_to_change_the_triggering_order_of/) order of their names. You can control the order by changing their names. But it is not the 
+best idea. Instead use the `Reinvocation Policy` [capability](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#reinvocation-policy)
+
+#### If there are multiple mutating webhooks what is the order in which they apply?
+
+
 ## ADD YOUR OWN FINDINGS AND EXTEND THIS PAGE
 
 Please feel free to contribute with your own findings. 
