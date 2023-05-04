@@ -6,7 +6,7 @@ to get to the right set of individuals
 
 ## Domsed
 
-Project Owners - Vaibhav Dhawan, Sameer Wadkar, Andrew Coleman
+Project Owners - Vaibhav Dhawan, Sameer Wadkar
 
 Volunteers- <ADD YOUR NAME WITH DETAILS ON WHAT YOU ARE COMFORTABLE ADDRESSING>
 
