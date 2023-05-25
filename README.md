@@ -10,11 +10,15 @@ Project Owners - Vaibhav Dhawan, Sameer Wadkar
 
 Volunteers- <ADD YOUR NAME WITH DETAILS ON WHAT YOU ARE COMFORTABLE ADDRESSING>
 
+Enablement [Documentation](domsed/README.md) 
+
 ## IRSA
 
 Project Owners - Sameer Wadkar, Vaibhav Dhawan
 
 Volunteers- <ADD YOUR NAME WITH DETAILS ON WHAT YOU ARE COMFORTABLE ADDRESSING>
+
+Enablement [Documentation](IRSA/README.md)
 
 
 
