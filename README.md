@@ -1,4 +1,4 @@
-# Self Paced Enablement for Field Engineered Projects
+# 🕊️ Self Paced Enablement for Field Engineered Projects  🕊️ 
 
 This repo is for adding self-paced enablement for Field Engineered projects. Every project will get its own subfolder 
 and with a list of instructions. This space is for adding general information about the project to enable everyone 

@@ -1,4 +1,4 @@
-# Self Paced Enablement for IRSA
+# 🕊️  Self Paced Enablement for IRSA 🕊️
 
 This is a self paced enablement for the [IAM ROLE TO SA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) 
 (IRSA) [Field Engineered Solution](https://github.com/cerebrotech/IRSA_DOMINO).
