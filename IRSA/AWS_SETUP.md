@@ -1,4 +1,4 @@
-## Prerequisite
+# 🕊️   AWS Prerequisites 🕊️ 
 Install boto3 library. You will need it to test IRSA. Some of the assumptions made in this enablement scenario-
 
 1. EKS Account Id - `946429944765` Prod-Field deployment is in this AWS Account
@@ -7,7 +7,7 @@ Install boto3 library. You will need it to test IRSA. Some of the assumptions ma
 3. The OIDC Provider Attached to your EKS cluster is ` oidc.eks.us-west-2.amazonaws.com/id/6377798F9D92DFC7C9C3873B8DA27C68`
    If the prod-field deployments EKS cluster changes, so will this provider. And the IRSA service will need to be reinstalled.
 
-### Assets AWS Account resources
+## Assets AWS Account resources
 
 In the Assests AWS Account you will find the following aws assets defined-
 
@@ -84,7 +84,7 @@ In the Assests AWS Account you will find the following aws assets defined-
   
 Roles with the same names will be defined in the EKS accounts and their intent is to be the src role for the corresponding role to assume in the assets account
 
-### EKS AWS Account resources
+## EKS AWS Account resources
 
 In the EKS AWS Account you will find the following policies-
 
