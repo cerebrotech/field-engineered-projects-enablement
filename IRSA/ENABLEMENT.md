@@ -829,28 +829,111 @@ The file should exist and be populated.
 
 ### The IAM Role in the EKS account does not have the Assume Role permission in the Assets account
 
-Got to the role `arn:aws:iam::946429944765:role/acme-list-bucket-role` and remove the permission 
+Go to the role `arn:aws:iam::946429944765:role/acme-list-bucket-role` and remove the permission 
 `arn:aws:iam::946429944765:role/acme-list-bucket-policy` attached to it.
 
+Run the following code
+```python
+import boto3
+list_bucket_profile_name='acme-list-bucket-role'
+session = boto3.session.Session(profile_name=list_bucket_profile_name)
+sts_client = session.client('sts')
+sts_client.get_caller_identity()
+```
+
+and you will see the error
+```shell
+ClientError: An error occurred (AccessDenied) when calling the AssumeRole operation: User: arn:aws:sts::946429944765:assumed-role/acme-list-bucket-role/botocore-session-1685039715 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::524112250363:role/acme-list-bucket-role
+```
+
+The error clearly mentions that the user session `User: arn:aws:sts::946429944765:assumed-role/acme-list-bucket-role/botocore-session-1685039715`
+does not have AssumeRole privileges on `User: arn:aws:sts::946429944765:assumed-role/acme-list-bucket-role/botocore-session-1685039715`
+
+Let us fix it
+
+Got to the role `arn:aws:iam::946429944765:role/acme-list-bucket-role` and add the permission 
+`arn:aws:iam::946429944765:role/acme-list-bucket-policy` back again.
+
+Run this code again
+
+```python
+import boto3
+list_bucket_profile_name='acme-list-bucket-role'
+session = boto3.session.Session(profile_name=list_bucket_profile_name)
+sts_client = session.client('sts')
+sts_client.get_caller_identity()
+```
+And this will now succeed with an output which looks like this
+
+```shell
+{'UserId': 'AROAXUB4GIX5XGPXPJ522:botocore-session-1685041376',
+ 'Account': '524112250363',
+ 'Arn': 'arn:aws:sts::524112250363:assumed-role/acme-list-bucket-role/botocore-session-1685041376',
+ 'ResponseMetadata': {'RequestId': '368e8d98-1ea3-43f3-afac-137abd536b84',
+  'HTTPStatusCode': 200,
+  'HTTPHeaders': {'x-amzn-requestid': '368e8d98-1ea3-43f3-afac-137abd536b84',
+   'content-type': 'text/xml',
+   'content-length': '482',
+   'date': 'Thu, 25 May 2023 19:02:56 GMT'},
+  'RetryAttempts': 0}}
+
+```
 
 
+### Update the trust policy of the Assets account to remove principal from EKS Accounts to assume it
 
+In the Assets Account go to the role `arn:aws:iam::524112250363:role/acme-list-bucket-role` and update the 
+trust relationship as follows:
+```yaml
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::524112250363:root"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+```
+We have replaced the AWS Account no from `946429944765` to `524112250363`
 
-If the logs have “AWS IAM Exceptions”, it means that the IAM role `acme-irsa-svc-role` associated with the IRSA pod does 
-not have the right IAM privileges to manipulate the policy files of the user roles being assumed by the workspaces.
+Run this code:
 
-Let us replicate this scenario:
+```python
+import boto3
+list_bucket_profile_name='acme-list-bucket-role'
+session = boto3.session.Session(profile_name=list_bucket_profile_name)
+sts_client = session.client('sts')
+sts_client.get_caller_identity()
+```
 
-1. Update the policy `acme-irsa-svc-policy` to remove the permission `iam:UpdateAssumeRolePolicy`
-2. Start a new workspace   
-2. Inside the workspace run the command `curl http://127.0.0.1:6003/refresh`
+You should see the following error which clearly indicates that the principal `arn:aws:sts::946429944765:assumed-role/acme-list-bucket-role/botocore-session-1685043112`
+is not allowed to assume the corresponding role in the `524112250363` account
 
-### AWS_CONFIG_FILE populated but boto3 call fails with `AssumeRole` failure for the role in the EKS account
+```shell
+An error occurred (AccessDenied) when calling the AssumeRole operation: User: arn:aws:sts::946429944765:assumed-role/acme-list-bucket-role/botocore-session-1685043112 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::524112250363:role/acme-list-bucket-role
+```
+Let us fix it. Change the trust relationship for the role `arn:aws:iam::524112250363:role/acme-list-bucket-role`  
+back to
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::946429944765:root"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
 
-This is simply the case of the trust policy of the underlying role in the EKS account does not have the `sub` 
-attribute of the trust policy containing the workspace service account attached to it.
+and run the same code above again. It succeeds.
 
-### AWS_CONFIG_FILE populated but boto3 call fails with `AssumeRole` failure for the role in the Assets account
+## Conclusion
 
-This is simply the case of the trust policy of the underlying role in the assets account does not trust principals in
-the assets account to assume the role.
+This tutorial covers the full enablement for the IRSA project. The latter section also covers a section for the
+Support Team to understand the reported errors and steps to debug and resolve them.
