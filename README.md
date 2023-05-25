@@ -10,6 +10,12 @@ Project Owners - Vaibhav Dhawan, Sameer Wadkar, Andrew Coleman
 
 Volunteers- <ADD YOUR NAME WITH DETAILS ON WHAT YOU ARE COMFORTABLE ADDRESSING>
 
+## IRSA
+
+Project Owners - Sameer Wadkar, Vaibhav Dhawan
+
+Volunteers- <ADD YOUR NAME WITH DETAILS ON WHAT YOU ARE COMFORTABLE ADDRESSING>
+
 
 
 
