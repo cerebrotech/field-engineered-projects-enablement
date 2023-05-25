@@ -80,21 +80,21 @@ If you are doing this in your own deployment, follow the instructions in the [ma
 ### Start the first workspace
 
 In the Prod Field Domino go the project [irsa-enablement](https://prod-field.cs.domino.tech/u/sameer_wadkar/irsa-enablement/overview)
-and start a workspace and open the notebook `test_irsa.ipynb`. Directly go to the section "What is a web identity token?".
+and start a workspace and open the notebook `enablement.ipynb`. Directly go to the section "What is a web identity token?".
 
 ### Verify the services are running
 
 First let us verify that the IRSA backend service is running
 
 ```shell
-curl http://irsa-svc.domino-field/healthz
+!curl http://irsa-svc.domino-field/healthz
 ## This is the expected output
 {'status': 'Healthy'}
 ```
 
 Now verify that your side-car container is running
 ```shell
-curl http://localhost:6003/healthz
+!curl http://localhost:6003/healthz
 ## This is the expected output
 {'status': 'Healthy'}
 ```
@@ -341,7 +341,7 @@ Let us actual make calls using the `boto3` api now :
 
 Let us use the boto3 library to fetch all the profiles available. This is similar to `cat $AWS_CONFIG_FILE`
 ```python
-import os
+
 import boto3.session
 for profile in boto3.session.Session().available_profiles:
     print(profile)
