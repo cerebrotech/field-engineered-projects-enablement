@@ -157,3 +157,8 @@ install/domsed.tar
 
 
 DOMSED_INSTALL/
+
+IRSA/demo/.terraform*
+IRSA/sample/*
+IRSA/demo/sample/eks_account_trust_policy.tfvars
+IRSA/demo/sample/main.tf
