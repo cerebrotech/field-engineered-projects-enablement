@@ -103,6 +103,28 @@ Inside your `SAMLRealm` you will find the following users
 
 Open the file `./src/ops/configure-sso-with-standalone-keycloak.py` to find out their roles and passwords
 
+## Test Credential Propagation
+
+Credential propagation is automatically enabled. Start a workspace and run the following in a terminal
+
+```shell
+$ env | grep AWS
+AWS_SHARED_CREDENTIALS_FILE=/var/lib/domino/home/.aws/credentials
+$ cat $AWS_SHARED_CREDENTIALS_FILE
+[swdemo22449-SamlRealm-saml-role_a_b]
+aws_access_key_id = aaaa
+aws_secret_access_key = xxxx
+aws_session_token = zzzz
+
+$ aws sts get-caller-identity --profile swdemo22449-SamlRealm-saml-role_a_b
+{
+    "UserId": "aaaa:integration-test@dominodatalab.com",
+    "Account": "<AWS_ACCOUNT_ID>",
+    "Arn": "arn:aws:sts::<AWS_ACCOUNT_ID>:assumed-role/swdemo22449-SamlRealm-saml-role@a.b/integration-test@dominodatalab.com"
+}
+```
+
+
 ## De-Configure SSO
 
 ```shell
