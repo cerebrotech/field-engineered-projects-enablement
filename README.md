@@ -21,7 +21,13 @@ Volunteers- <ADD YOUR NAME WITH DETAILS ON WHAT YOU ARE COMFORTABLE ADDRESSING>
 Enablement [Documentation](IRSA/README.md)
 
 
+## Keycloak-IDP-SSO With Credential Propagation
 
+Project Owners - Alex Panin/Dmitriy Volk
+
+Volunteers- <ADD YOUR NAME WITH DETAILS ON WHAT YOU ARE COMFORTABLE ADDRESSING>
+
+Enablement [Documentation](Keycloak-IDP-SSO/README.md)
 
 
 
