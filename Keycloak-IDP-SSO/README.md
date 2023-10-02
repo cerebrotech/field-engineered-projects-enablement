@@ -43,7 +43,8 @@ I used Python 3.11 for testing
 ```shell
 cd  $HOME/domino-sso/platform-apps-develop/
 ##My $PYTHON_BIN is /Users/sameerwadkar/Library/Python/3.11/bin/
-
+# export PYTHON_BIN=/Users/sameerwadkar/Library/Python/3.11/bin/
+$PYTHON_BIN/pipenv shell
 #Start shell within the environment
 $PYTHON_BIN/pipenv shell
 
