@@ -1,4 +1,4 @@
-# Domsed Workbooks client
+# Domino Extensions API
 
 Following instructions in the notebook `domsed_client.ipynb`
 
