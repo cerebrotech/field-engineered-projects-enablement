@@ -19,7 +19,7 @@ cat $HOME/.ssh/id_ed25519.pub
 
 Configure this as an SSH Key in your Github Account's page and for that key configure SSO for the `cerebrotech` organization
 
-<img src="https://github.com/cerebrotech/field-engineered-projects-enablement/tree/main/images/configure-sso-for-cerebrotech.png"/>
+<img src="https://github.com/cerebrotech/field-engineered-projects-enablement/blob/main/images/configure-sso-for-cerebrotech.png"/>
 
 3. In your Domino deployment, add the following keys to central config
 ```shell
