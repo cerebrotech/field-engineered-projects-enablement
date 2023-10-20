@@ -19,6 +19,10 @@ cat $HOME/.ssh/id_ed25519.pub
 
 Configure this as an SSH Key in your Github Account's page and for that key configure SSO for the `cerebrotech` organization
 
+<img src="https://github.com/cerebrotech/field-engineered-projects-enablement/tree/main/images/configure-sso-for-cerebrotech.png"/>
+
+
+
 ### Configure the AWS Environment
 
 Create access keys for an Administrator user and configure your own aws environment. This page assumes these keys are configured in your `default` profile 
