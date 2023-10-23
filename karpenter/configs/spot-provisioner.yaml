@@ -1,0 +1,43 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: spot-karpenter
+spec:
+  requirements:
+    - key: karpenter.k8s.aws/instance-category
+      operator: In
+      values: [t,m]
+    - key: dominodatalab.com/node-pool
+      operator: In
+      values: ["spot-karpenter"]
+    - key: dominodatalab.com/domino-node
+      operator: In
+      values: ["true"]
+    - key: kubernetes.io/os
+      operator: In
+      values: ["linux"]
+    - key: karpenter.k8s.aws/instance-generation
+      operator: Gt
+      values: ["2"]
+    - key: karpenter.sh/capacity-type
+      operator: In
+      values: ["spot"]  
+  providerRef:
+    name: spot-karpenter
+  ttlSecondsAfterEmpty: 300  
+  weight: 10  
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: spot-karpenter
+spec:
+  subnetSelector:
+    domino-deploy-id: "ddl-field"
+  securityGroupSelector:
+    aws:eks:cluster-name: "ddl-field"
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 200Gi
+        volumeType: gp3

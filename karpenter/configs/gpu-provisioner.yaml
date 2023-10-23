@@ -1,0 +1,45 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default-gpu
+spec:
+  requirements:
+    - key: karpenter.k8s.aws/instance-category
+      operator: In
+      values: [g]
+    - key: dominodatalab.com/node-pool
+      operator: In
+      values: ["default-gpu-karpenter"]
+    - key: dominodatalab.com/domino-node
+      operator: In
+      values: ["true"]
+    - key: kubernetes.io/os
+      operator: In
+      values: ["linux"]
+    - key: "karpenter.k8s.aws/instance-cpu"
+      operator: In
+      values: ["2", "4", "8"]
+    - key: karpenter.k8s.aws/instance-generation
+      operator: Gt
+      values: ["2"]  
+  labels:
+    nvidia.com/gpu: "true"       
+  providerRef:
+    name: default-gpu
+  ttlSecondsAfterEmpty: 300  
+  
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: default-gpu
+spec:
+  subnetSelector:
+    domino-deploy-id: "ddl-field"
+  securityGroupSelector:
+    aws:eks:cluster-name: "ddl-field"
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 200Gi
+        volumeType: gp3
