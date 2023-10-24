@@ -1,6 +1,6 @@
-# ddl-field Karpenter scripts and configuration
+# Getting started with Karpenter
 
-This repository contains the Karpenter configuration files 
+This repository contains the quick start steps and configuration files to get familiar with Karpenter with Domino. The following configuration files are included,
 
 - karpenter deployment configuration
 - provisioner definitions
@@ -10,7 +10,7 @@ and deployment scripts
 - shell scripts
 - terraform  code for IAM policy configuration
 
-Documentation - https://dominodatalab.atlassian.net/wiki/spaces/~621e9b524160640069c62b24/pages/2498986039/Enable+Karpenter+In+Prod+Field
+Full Documentation with examples from the prod-field can be found here - https://dominodatalab.atlassian.net/wiki/spaces/~621e9b524160640069c62b24/pages/2498986039/Enable+Karpenter+In+Prod+Field
 
 ## Prerequisites
 
