@@ -15,8 +15,14 @@ resource "aws_iam_role" "irsa-workload-role" {
     assume_role_policy = data.aws_iam_policy_document.workload-role-trust-policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "irsa-workload-example" {
-    count = length(var.policy-to-attach) > 0 ? 1 : 0
+resource "aws_iam_policy" "irsa-workload-policy" {
+    count = length(var.irsa-workload-policy) > 0 ? 1 : 0
+    name = "${var.irsa-workload-role-name}-policy"
+    policy = var.irsa-workload-policy
+}
+
+resource "aws_iam_role_policy_attachment" "irsa-workload-role-policy" {
+    count = length(var.irsa-workload-policy) > 0 ? 1 : 0
     role = aws_iam_role.irsa-workload-role.name
-    policy_arn = data.aws_iam_policy.policy-to-attach-to-role.arn
+    policy_arn = aws_iam_policy.irsa-workload-policy[0].arn
 }

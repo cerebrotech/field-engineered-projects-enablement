@@ -7,6 +7,6 @@ variable "associated-proxy-role-list" {
     default = []
 }
 
-variable "policy-to-attach" {
-    default = ""
+variable "irsa-workload-policy" {
+  default = ""
 }
