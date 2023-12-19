@@ -1,0 +1,42 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: gpu-p3
+spec:
+  requirements:
+    - key: karpenter.k8s.aws/instance-category
+      operator: In
+      values: [p]
+    - key: dominodatalab.com/node-pool
+      operator: In
+      values: ["gpu-p3-karpenter"]
+    - key: dominodatalab.com/domino-node
+      operator: In
+      values: ["true"]
+    - key: kubernetes.io/os
+      operator: In
+      values: ["linux"]
+    - key: karpenter.k8s.aws/instance-generation
+      operator: Gt
+      values: ["2"]  
+  labels:
+    nvidia.com/gpu: "true"       
+  providerRef:
+    name: gpu-p3
+  ttlSecondsAfterEmpty: 300  
+  
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: gpu-p3
+spec:
+  subnetSelector:
+    domino-deploy-id: "ddl-field"
+  securityGroupSelector:
+    aws:eks:cluster-name: "ddl-field"
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 200Gi
+        volumeType: gp3

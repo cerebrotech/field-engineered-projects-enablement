@@ -1,0 +1,46 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: app-model-karpenter
+spec:
+  requirements:
+    - key: karpenter.k8s.aws/instance-category
+      operator: In
+      values: [c,m]
+    - key: dominodatalab.com/node-pool
+      operator: In
+      values: ["app-model-karpenter"]  
+    - key: dominodatalab.com/workload-type
+      operator: In
+      values: ["App", "ModelAPI"]
+    - key: dominodatalab.com/domino-node
+      operator: In
+      values: ["true"]
+    - key: kubernetes.io/os
+      operator: In
+      values: ["linux"]
+    - key: karpenter.k8s.aws/instance-generation
+      operator: Gt
+      values: ["2"]
+    - key: karpenter.sh/capacity-type
+      operator: In
+      values: ["spot"]  
+  providerRef:
+    name: app-model-karpenter
+  ttlSecondsAfterEmpty: 300  
+  weight: 30  
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: app-model-karpenter
+spec:
+  subnetSelector:
+    domino-deploy-id: "ddl-field"
+  securityGroupSelector:
+    aws:eks:cluster-name: "ddl-field"
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 100Gi
+        volumeType: gp3
