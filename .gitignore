@@ -162,5 +162,7 @@ IRSA/demo/.terraform*
 IRSA/sample/*
 IRSA/demo/sample/eks_account_trust_policy.tfvars
 IRSA/demo/sample/main.tf
-IRSA/terraform/terraform.tfstate
-IRSA/terraform/terraform.tfstate.backup
+**/.terraform
+**/.*lock*
+**/*tfstate*
+**/*.tfvars

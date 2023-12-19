@@ -10,7 +10,7 @@ variable "domino-irsa-namespace" {
 
 variable "resource-prefix" {
     type = string
-    default = "jhu-domino"
+    default = ""
 }
 
 variable "irsa-wl-role-suffix" {
@@ -28,6 +28,7 @@ variable "proxy-role-count" {
 }
 
 locals {
-    svc-role-name = "${var.resource-prefix}-irsa-svc-role"
+    svc-role-name = length(var.resource-prefix) > 0 ? "${var.resource-prefix}-irsa-svc-role" : "${var.eks-cluster-name}-domino-irsa-svc-role"
+    resource-prefix = length(var.resource-prefix) > 0 ? var.resource-prefix : "${var.eks-cluster-name}-domino"
     #wl-role-name = "${var.resource-prefix}-"
 }

@@ -10,6 +10,12 @@ data "aws_iam_policy_document" "irsa-workload-example-policy" {
     }
 }
 
+# resource "aws_iam_role_policy_attachment" "irsa-workload-example" {
+#     provider = aws.asset-acct
+#     role = module.irsa_workload_role3.name
+#     policy_arn = aws_iam_policy.irsa-workload-example-policy.arn
+# }
+
 #resource "aws_iam_policy" "irsa-workload-example-policy" {
 #    provider = aws.asset-acct
 #    name = "${local.wl-role-name}-policy"
